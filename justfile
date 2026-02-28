@@ -1,8 +1,0 @@
-
-# Latex
-
-studio:
-    texstudio
-
-build:
- 

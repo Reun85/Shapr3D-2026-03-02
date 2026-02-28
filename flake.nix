@@ -19,6 +19,7 @@
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [ texstudio tex pkgs.zathura just ];
 
+          shellHook = ''echo "editor: texstudio"'';
         };
       });
 }
