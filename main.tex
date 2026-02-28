@@ -1,5 +1,6 @@
-\documentclass[xcolor=dvipsnames,aspectratio=169,9pt,draft]{beamer}
+\documentclass[xcolor=dvipsnames,aspectratio=169,9pt]{beamer}
 \usefonttheme[onlymath]{serif}
+
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -12,6 +13,7 @@
   \useoutertheme{infolines}
 % \setbeamertemplate{caption}[numbered]
 }
+
 \usepackage{graphicx}
 \usepackage[percent]{overpic}
 \usepackage[utf8]{inputenc}
@@ -135,6 +137,7 @@
 \newcommand{\nrw}[1]{\rvert_{_{#1}}}
 
 \newcommand{\whitecolorbox}[1]{{\setlength{\fboxsep}{0pt}\colorbox{white}{#1}}}
+
 
 \usepackage{listings}
 \usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
@@ -536,7 +539,7 @@ Miért kell absztrakt fa?
 
 %------------------------------------------------
 \begin{frame}{Félterek kezelése}
-\begin{columns}[T]
+\begin{columns}[c]
 \begin{column}{0.45\textwidth}
 
 Probléma:
@@ -573,7 +576,7 @@ Előny:
 
 \end{column}
 \begin{column}{0.45\textwidth}
-\includegraphics[width=\linewidth]{images/half-space.png}
+\includegraphics[width=\linewidth]{images/half_space.png}
 \end{column}
 \end{columns}
 \end{frame}
