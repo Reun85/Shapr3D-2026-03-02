@@ -1,0 +1,139 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{csabamath}[2018/02/03 Csaba's custom article mathematics style]
+\let\proof\relax 
+\let\endproof\relax
+\RequirePackage{bm, amsmath, amssymb, amsthm}
+\RequirePackage{thmtools, bigints, xcolor, hyperref, subcaption}
+\usepackage{mathtools}
+\RequirePackage{commath}
+%  \hypersetup{
+%      colorlinks,
+%      linkcolor	={blue!30!black},
+%      citecolor	={blue!30!black},
+%      urlcolor	={blue!30!black},
+%      filecolor	={blue!30!black},
+%  }
+
+% %%% THEOREM STYLES
+
+% space above, space below, body font, indent amount, theorem head font, punctuation after theorem head, space after theorem head, theorem head spec (can be left empty, meaning `normal')
+ %\newtheoremstyle{mydefinitionstyle}{0.40em}{0.35em}{}{}{\bfseries}{.}{.5em}{}
+ %\theoremstyle{mydefinitionstyle}
+%  \theoremstyle{definition}
+%  \newtheorem{definition}{Definition}
+ 
+%  \newtheoremstyle{mythroremstyle}{0.40em}{0.35em}{\itshape}{}{\bfseries}{.}{.5em}{}
+%  \theoremstyle{mythroremstyle}
+%  \newtheorem{theorem}{Theorem}
+ 
+%  \newtheoremstyle{mypropositionstyle}{0.35em}{0.30em}{\itshape}{}{\bfseries}{.}{.5em}{}
+%  \theoremstyle{mypropositionstyle}
+%  \newtheorem{proposition}{Proposition}
+%  \newtheoremstyle{myconsequencestyle}{0.30em}{0.25em}{\itshape}{}{\bfseries}{.}{.5em}{}
+%  \theoremstyle{myconsequencestyle}
+%  \newtheorem{corollary}{Corollary}
+%  \newtheorem{lemma}{Lemma}
+%  \newtheoremstyle{myremarktyle}{0.20em}{0.15em}{}{}{\bfseries\itshape}{.}{.3em}{}
+%  \theoremstyle{myremarktyle}
+%  \newtheorem*{remark}{Remark}
+%  \newtheorem*{example}{Example}
+
+%% MATH
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\E}{\mathbb{E}}
+
+\renewcommand{\L}{\mathrm{L}}
+\renewcommand{\S}{\mathcal{K}} %DELETES PARAGRAPH SIGN
+\newcommand{\cS}{\overline{\mathcal{K}}}
+
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\Powerset}{\mathcal{P}}
+\newcommand{\powset}{\mathcal{P}}
+\newcommand{\F}{\mathcal{F}}
+
+\newcommand{\Union}{\bigcup\limits}
+\newcommand{\Intersection}{\bigcap\limits}
+\newcommand{\Metszet}{\bigcap\limits}
+\newcommand{\Then}{\;\;\Longrightarrow\;\;}
+\newcommand{\Because}{\;\;\Longleftarrow\;\;}
+\newcommand{\When}{\;\;\Longleftrightarrow\;\;}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle} %!!
+
+\let\oldint\int
+\renewcommand\int{\oldint\limits}
+
+\newcommand\notempty{\not=\emptyset}
+\newcommand\emptynot{\emptyset\not=}
+
+\let\noteqsubset\subset
+\let\oldsubset\subset
+\renewcommand{\subset}{\subseteq}
+\let\noteqsupset\supset
+\let\oldsupset\supset
+\renewcommand{\supset}{\supseteq}
+\let\oldhat\hat
+\renewcommand\hat\widehat
+
+%Print comma, colon and and give space
+\let\oldcomma\,
+%\renewcommand\,{,\oldcomma}
+\let\oldcolon\:
+\renewcommand\:{\;:\;}
+\let\oldforall\forall
+\renewcommand\forall{\oldforall\oldcomma}
+\let\oldexists\exists
+\renewcommand\exists{\oldexists\oldcomma}
+\let\oldmid\mid
+\renewcommand\mid{\;\oldmid\;}
+
+%\renewcommand{\d}[1]{\ensuremath{\operatorname{d}\!{#1}}}
+
+\newcommand{\twopartdef}[4]{\left\{\begin{array}{ll}#1&\mbox{if }#2\\#3&\mbox{if }#4\end{array}\right.}
+
+\DeclareMathOperator{\Lip}{Lip}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\inter}{int}
+
+\DeclareMathOperator{\Lbd}{\mathcal F}
+\DeclareMathOperator{\Ldb}{\mathcal F}
+\DeclareMathOperator{\Ubd}{\mathcal C}
+\DeclareMathOperator{\Udb}{\mathcal C}
+%\DeclareMathOperator{\D}{\mathbf{D}}
+\newcommand{\D}[1]{\mathbf{D}\def\temp{#1}\ifx\temp\empty\else{_{#1}}\fi}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\newcommand{\range}{\mathcal{R}}
+
+\newcommand{\sfrac}[2]{{\textstyle\frac{#1}{#2}}}
+\newcommand{\sbinom}[2]{{\textstyle\binom{#1}{#2}}}
+
+\newcommand\restr[2]{{\left.\kern-\nulldelimiterspace #1 \vphantom{\big|} \right|_{#2} }}
+
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\vecdd}[2]{\bmat{#1 \\ #2}}
+\newcommand{\vecddd}[3]{\bmat{#1 \\ #2 \\ #3}}
+\newcommand{\matdd}[4]{\bmat{#1 & #2 \\ #3 & #4}}
+\newcommand{\unit}[1]{\widehat{#1}}
+\newcommand{\unitbm}[1]{\unit{\bm{#1}}} % because of frequent use
+\newcommand{\normalize}[1]{\unit{\underline{#1}}}
+
+\newcommand{\gabor}[1]{ {\textcolor{green}{#1}} }
+\newcommand{\csaba}[1]{{\textcolor{blue}{#1}}}
+%\renewcommand\qedsymbol{{\textcolor{red}{$\blacksquare$}}}
+
+
+\newcommand*{\tran}{^{\mkern-1.5mu\mathsf{T}}}% transponaltjel, \mathsf{T}, \top, \intercal
+
+\endinput
