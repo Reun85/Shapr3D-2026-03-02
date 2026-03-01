@@ -375,23 +375,19 @@ Kép:\cite{CsikosBalazsKep}
 \end{column}
 \begin{column}{0.45\textwidth}
 
-\begin{tikzpicture}
 
   
   \only<1>{
   
-      \node[opacity=0.3] (img2) at (1cm,-1cm) {\includegraphics[height=0.65\paperheight]{images/csikos_balazs_csg.png}};
-      \node (img1) {\includegraphics[height=0.65\paperheight]{images/csikos_balazs_sdf.png}};
+     \includegraphics[width=\linewidth]{images/csikos_balazs_csg.png}
+      
   }
 
   
   \only<2>{
-      \node [opacity=0.3](img1) {\includegraphics[height=0.65\paperheight]{images/csikos_balazs_sdf.png}};
-      \node (img2) at (1cm,-1cm) {\includegraphics[height=0.65\paperheight]{images/csikos_balazs_csg.png}};
-      
-  }
+    \includegraphics[height=0.8\paperheight]{images/csikos_balazs_sdf.png}
 
-\end{tikzpicture}
+  }
 
 \end{column}
 \end{columns}
@@ -479,29 +475,25 @@ Cél:
     \item Struktúra megőrzése
     \item Matematikai információ kinyerhetősége
 \end{itemize}
-A képek miért nem illeszkednek rendesen?
 \end{column}
 
 \begin{column}{0.45\textwidth}
 \only<1>{
 \centering
-\includegraphics[width=0.6\linewidth]{images/csikos_balazs_csg.png}
-\includegraphics[width=0.3\linewidth]{images/csikos_balazs_sdf.png}%
-\includegraphics[width=0.3\linewidth]{images/csikos_balazs_csg_2.png}
+\includegraphics[width=\linewidth]{images/csikos_balazs_csg.png}
+
 }
 \only<2>{
 
 \centering
-\includegraphics[width=0.6\linewidth]{images/csikos_balazs_sdf.png}
-\includegraphics[width=0.3\linewidth]{images/csikos_balazs_csg.png}%
-\includegraphics[width=0.3\linewidth]{images/csikos_balazs_csg_2.png}
+
+\includegraphics[height=0.8\paperheight]{images/csikos_balazs_sdf.png}%
+
 }
 \only<3>{
 \centering
 
-\includegraphics[width=0.6\linewidth]{images/csikos_balazs_csg_2.png}
-\includegraphics[width=0.3\linewidth]{images/csikos_balazs_sdf.png}%
-\includegraphics[width=0.3\linewidth]{images/csikos_balazs_csg.png}
+\includegraphics[width=\linewidth]{images/csikos_balazs_csg_2.png}
 }
 \end{column}
 \end{columns}
