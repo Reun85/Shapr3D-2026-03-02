@@ -176,7 +176,7 @@ Eötvös Loránd Tudományegyetem
 
 Shapr3d%
 }    
-\date[Shapr3D (02. Március 2026)]{%
+\date[Shapr3D (03. Március 2026)]{%
 }
 
 %%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%
@@ -633,14 +633,14 @@ Alap heurisztika:
 
 Ez referenciaként szolgál a méréshez.
 
-Az unió műveletek helyettesíthetők:
+%Az unió műveletek helyettesíthetők:
 
-Előny:
-\begin{itemize}
-	\item Elkerülhető a problémás $\min$ művelet
-	\item Tiszta propagáció
-	\item Stabilabb sphere tracing
-\end{itemize}
+%Előny:
+%\begin{itemize}
+	%\item Elkerülhető a problémás $\min$ művelet
+	%\item Tiszta propagáció
+	%\item Stabilabb sphere tracing
+%\end{itemize}
 \end{column}
 \begin{column}{0.45\textwidth}
 	\only<1>{\includegraphics[width=\linewidth]{images/opt/DNF.png}}
@@ -694,12 +694,10 @@ Probléma:
 		\begin{column}{0.45\textwidth}
 			Megfigyelés:
 			\begin{itemize}
-				\item A részfák valahol összeérnek
-				\item Például unióknál
-			\end{itemize}
-			Ötlet:
-			\begin{itemize}
-				\item Minimum művelet $\Leftrightarrow$ select	
+				\item A részfák határai találkoznak (pl. unió műveleteknél).
+				\vspace{0.5cm}
+					\item \texttt{min()} művelet $\Rightarrow$ \texttt{select} utasítás.
+					\item Döntés a részfa indexe alapján.
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.45\textwidth}
@@ -708,6 +706,15 @@ Probléma:
 	\end{columns}
 \end{frame}
 
+\begin{frame}{Összefoglaló}
+	\begin{itemize}
+		\item Semmi
+		\item Naiv
+		\item Monolitikus
+		\item Indexelt
+		\item Parametrikus
+	\end{itemize}
+\end{frame}
 \begin{frame}{Eredmények}
 
 	Ide még jönnek a képek.
@@ -716,7 +723,7 @@ Probléma:
 			\centering
 			\begin{tabular}{|l|c|c|c|c|c|c|}
 				\hline
-				\textbf{Scene $\mu$s} & \textbf{Sima} & \textbf{DNF} & \textbf{Ultra Shader} & \textbf{Collected} & \textbf{Recollect} & \textbf{Merge} \\ \hline
+				\textbf{Scene $\mu$s} & \textbf{SDF} & \textbf{Naiv} & \textbf{Monolitikus} & \textbf{Indexelt} & \textbf{Instanced} & \textbf{Parametrikus} \\ \hline
 				pipe & 920 & 725 & 889 & 850 & 796 & ! \\ \hline
 				miniature high & 1215 & 231 & 1205 & 1889 & 1200 & 485 \\ \hline
 				miniature low & 1180 & 260 & 385 & 1789 & 1236 & 595 \\ \hline
