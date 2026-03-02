@@ -690,7 +690,7 @@ Probléma:
 \end{column}
 \end{columns}
 \end{frame}
-\begin{frame}{Részfa elimináció}
+\begin{frame}[fragile]{Részfa elimináció}
 	\begin{columns}[c]
 		\begin{column}{0.45\textwidth}
 			Megfigyelés:
@@ -701,9 +701,17 @@ Probléma:
 					\item Döntés a részfa indexe alapján.
 			\end{itemize}
 		\end{column}
-		\begin{column}{0.45\textwidth}
-			\includegraphics[width=\linewidth]{images/opt/better_ultra_shader.png}
-		\end{column}
+\begin{column}{0.5\textwidth}
+	\begin{lstlisting}[language=C++, basicstyle=\ttfamily\small]
+		// Eredeti
+		float dist =  min(d1, d2);
+		
+		// Helyett
+		float dist = 
+		(pipeline_ind == 1) ?
+			  d1 : d2;
+	\end{lstlisting}
+\end{column}
 	\end{columns}
 \end{frame}
 

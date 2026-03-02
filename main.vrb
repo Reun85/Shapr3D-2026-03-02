@@ -1,0 +1,23 @@
+\frametitle{Részfa elimináció}
+\begin{columns}[c]
+		\begin{column}{0.45\textwidth}
+			Megfigyelés:
+			\begin{itemize}
+				\item A részfák határai találkoznak (pl. unió műveleteknél).
+				\vspace{0.5cm}
+					\item \texttt{min()} művelet $\Rightarrow$ \texttt{select} utasítás.
+					\item Döntés a részfa indexe alapján.
+			\end{itemize}
+		\end{column}
+\begin{column}{0.5\textwidth}
+	\begin{lstlisting}[language=C++, basicstyle=\ttfamily\small]
+		// Eredeti
+		float dist =  min(d1, d2);
+		
+		// Helyett
+		float dist =
+		(pipeline_ind == 1) ?
+			  d1 : d2;
+	\end{lstlisting}
+\end{column}
+	\end{columns}
