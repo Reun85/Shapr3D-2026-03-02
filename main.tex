@@ -30,7 +30,6 @@
 \usepackage{lmodern}
 \usepackage{textpos}
 \usepackage[normalem]{ulem}
-\usepackage{biblatex}
 
 \usepackage[%
     backend=biber,
@@ -169,7 +168,7 @@
 \usepackage[displaymath, mathlines]{lineno}
 \linenumbers
 
-\title{CSG DNF}
+\title[SDF DNF]{\huge SDF-alapú CSG fák hatékony megjelenítése befoglaló dobozokkal}
 %\subtitle{Subtitle}
 \author{Gugi Gergely}
 \institute[ELTE]{%
@@ -543,6 +542,7 @@ Cél:
 \end{columns}
 \end{frame}
 
+
 %------------------------------------------------
 \subsection{Lineáris egyenletrendszer}
 \begin{frame}{Félterek kezelése}
@@ -590,7 +590,7 @@ Cél:
 \end{frame}
 
 %------------------------------------------------
-\section{Megjelenítés}
+
 \begin{frame}{Mit nyerünk ezzel?}
 
 \begin{columns}[T]
@@ -603,7 +603,7 @@ A módszer lehetővé teszi:
     \item Részfák prune-olását
 \end{itemize}
 
-DNF normálforma:
+Diszjunktív normálforma(DNF):
 \begin{itemize}
     \item Egyszerűbb uniók
     \item Korai elágazás-elimináció
@@ -614,13 +614,24 @@ DNF normálforma:
 \includegraphics[width=\linewidth]{images/opt/DNF.png}
 \end{column}
 \end{columns}
+
+\end{frame}
+\begin{frame}
+	\centering
+	\includegraphics[width=\linewidth]{images/intervallum_pipeline.png}
 \end{frame}
 
 %------------------------------------------------
-\subsection{Módszerek}
+\section{Megjelenítés}
+
 \begin{frame}{Pipeline bontás és teljesítmény}
 \begin{columns}[T]
 \begin{column}{0.45\textwidth}
+\begin{itemize}
+	\item Mindent visszafonunk
+	\item Teljes SDF kiértékelés minden dobozon
+\end{itemize}
+
 Ha minden kis doboz külön pipeline-t kap:
 
 \begin{itemize}
@@ -628,11 +639,6 @@ Ha minden kis doboz külön pipeline-t kap:
     \item Sok doboz esetén pipeline váltási költség nő
 \end{itemize}
 
-Alap heurisztika:
-\begin{itemize}
-    \item Mindent visszafonunk
-    \item Teljes SDF kiértékelés minden dobozon
-\end{itemize}
 
 Ez referenciaként szolgál a méréshez.
 
@@ -646,20 +652,15 @@ Ez referenciaként szolgál a méréshez.
 %\end{itemize}
 \end{column}
 \begin{column}{0.45\textwidth}
-	\only<1>{\includegraphics[width=\linewidth]{images/opt/DNF.png}}
-	\only<2>{\includegraphics[width=\linewidth]{images/opt/NO_DNF.png}}
+	\only<2>{\includegraphics[width=\linewidth]{images/opt/DNF.png}}
+	\only<1>{\includegraphics[width=\linewidth]{images/opt/NO_DNF.png}}
 \end{column}
 \end{columns}
 \end{frame}
 
 \begin{frame}
-	\begin{columns}[T]
-		\begin{column}{0.45\textwidth}
-		\end{column}
-		\begin{column}{0.45\textwidth}
-			\includegraphics[width=\linewidth]{images/pipeline.png}
-		\end{column}
-	\end{columns}
+	\includegraphics[width=\linewidth]{images/pipeline.png}
+
 \end{frame}
 
 %------------------------------------------------
