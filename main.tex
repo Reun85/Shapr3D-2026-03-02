@@ -173,6 +173,7 @@
 \author{Gugi Gergely}
 \institute[ELTE]{%
 Eötvös Loránd Tudományegyetem
+
 Shapr3d%
 }    
 \date[Shapr3D (02. Március 2026)]{%
@@ -343,6 +344,7 @@ $
 \end{frame}
 
 
+\subsection{CSG}
 %------------------------------------------------
 \begin{frame}{SDF előállítása CSG fával}
 \begin{columns}[T]
@@ -394,6 +396,7 @@ Kép:\cite{CsikosBalazsKep}
 \end{frame}
 
 %------------------------------------------------
+
 \begin{frame}{A pontosság problémája}
 \begin{columns}[T]
 \begin{column}{0.45\textwidth}
@@ -425,6 +428,8 @@ Példa:
 \end{columns}
 \end{frame}
 
+\section{Methodology}
+\subsection{Ötlet}
 %------------------------------------------------
 \begin{frame}{Lokális térbeli korlátozás}
 \begin{columns}[c]
@@ -455,6 +460,7 @@ Cél: \textbf{Automatikus befoglaló tér meghatározása}.
 \end{frame}
 
 %------------------------------------------------
+\section{Reprezentáció}
 \begin{frame}{Reprezentáció a CSG és a nyers SDF között}
 
 \begin{columns}[c]
@@ -493,13 +499,19 @@ Cél:
 \only<3>{
 \centering
 
-\includegraphics[width=\linewidth]{images/csikos_balazs_csg_2.png}
+\includegraphics[width=\linewidth]{images/stored_csg_1.png}
+}
+\only<4>{
+	\centering
+	
+	\includegraphics[width=\linewidth]{images/stored_csg_2.png}
 }
 \end{column}
 \end{columns}
 \end{frame}
 
 %------------------------------------------------
+\subsection{Intervallum aritmetika}
 \begin{frame}{Intervallum aritmetika}
 
 \begin{columns}[T]
@@ -530,6 +542,7 @@ Miért kell absztrakt fa?
 \end{frame}
 
 %------------------------------------------------
+\subsection{Lineáris egyenletrendszer}
 \begin{frame}{Félterek kezelése}
 \begin{columns}[c]
 \begin{column}{0.45\textwidth}
@@ -574,6 +587,7 @@ Előny:
 \end{frame}
 
 %------------------------------------------------
+\section{Megjelenítés}
 \begin{frame}{Mit nyerünk ezzel?}
 
 \begin{columns}[T]
@@ -594,12 +608,13 @@ DNF normálforma:
 
 \end{column}
 \begin{column}{0.45\textwidth}
-\includegraphics[width=\linewidth]{images/summary.png}
+\includegraphics[width=\linewidth]{images/opt/DNF.png}
 \end{column}
 \end{columns}
 \end{frame}
 
 %------------------------------------------------
+\subsection{Módszerek}
 \begin{frame}{Pipeline bontás és teljesítmény}
 \begin{columns}[T]
 \begin{column}{0.45\textwidth}
@@ -617,10 +632,31 @@ Alap heurisztika:
 \end{itemize}
 
 Ez referenciaként szolgál a méréshez.
+
+Az unió műveletek helyettesíthetők:
+
+Előny:
+\begin{itemize}
+	\item Elkerülhető a problémás $\min$ művelet
+	\item Tiszta propagáció
+	\item Stabilabb sphere tracing
+\end{itemize}
 \end{column}
 \begin{column}{0.45\textwidth}
+	\only<1>{\includegraphics[width=\linewidth]{images/opt/DNF.png}}
+	\only<2>{\includegraphics[width=\linewidth]{images/opt/NO_DNF.png}}
 \end{column}
 \end{columns}
+\end{frame}
+
+\begin{frame}
+	\begin{columns}[T]
+		\begin{column}{0.45\textwidth}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			\includegraphics[width=\linewidth]{images/pipeline.png}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 %------------------------------------------------
@@ -643,39 +679,63 @@ Lehetséges optimalizáció:
 
 Probléma:
 \begin{itemize}
-    \item Spatial coherence szükséges
+    \item Térbeli összefüggés szükséges
     \item Nem lokális dobozok összevonása nem hoz nyereséget
 \end{itemize}
 \end{column}
 \begin{column}{0.45\textwidth}
+	\only<2>{\includegraphics[width=\linewidth]{images/opt/DNF_const_merge.png}}
+	\only<1>{\includegraphics[width=\linewidth]{images/opt/DNF_spatial_coherence.png}}
 \end{column}
 \end{columns}
 \end{frame}
-
-%------------------------------------------------
-\begin{frame}{Select-alapú optimalizáció}
-\begin{columns}[T]
-\begin{column}{0.45\textwidth}
-Az unió műveletek helyettesíthetők:
-
-%\[
-%\texttt{select(pipeline\_index, f_1(x), f_2(x))}
-%\]
-
-Előny:
-\begin{itemize}
-    \item Elkerülhető a problémás $\min$ művelet
-    \item Tiszta propagáció
-    \item Stabilabb sphere tracing
-\end{itemize}
-
-\end{column}
-\begin{column}{0.45\textwidth}
-\end{column}
-\end{columns}
+\begin{frame}{Részfa elimináció}
+	\begin{columns}[c]
+		\begin{column}{0.45\textwidth}
+			Megfigyelés:
+			\begin{itemize}
+				\item A részfák valahol összeérnek
+				\item Például unióknál
+			\end{itemize}
+			Ötlet:
+			\begin{itemize}
+				\item Minimum művelet $\Leftrightarrow$ select	
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			\includegraphics[width=\linewidth]{images/opt/better_ultra_shader.png}
+		\end{column}
+	\end{columns}
 \end{frame}
 
-%------------------------------------------------
+\begin{frame}{Eredmények}
+
+	Ide még jönnek a képek.
+			
+		\begin{table}[htbp]
+			\centering
+			\begin{tabular}{|l|c|c|c|c|c|c|}
+				\hline
+				\textbf{Scene $\mu$s} & \textbf{Sima} & \textbf{DNF} & \textbf{Ultra Shader} & \textbf{Collected} & \textbf{Recollect} & \textbf{Merge} \\ \hline
+				pipe & 920 & 725 & 889 & 850 & 796 & ! \\ \hline
+				miniature high & 1215 & 231 & 1205 & 1889 & 1200 & 485 \\ \hline
+				miniature low & 1180 & 260 & 385 & 1789 & 1236 & 595 \\ \hline
+				miniature head-on & 1460 & 366 & 566 & 2450 & 1350 & 660 \\ \hline
+				DH & 1460 & 185 & 408 & 49300 & 36910 & 660 \\ \hline
+				DH 2.7k obj & FAIL 0.6 s & 800 & FAIL 608 & - & - & - \\ \hline
+				2500 boxes & FAIL & 792 & - & - & - & - \\ \hline
+			\end{tabular}
+			
+			GPU: 2080 SUPER
+			
+			Gyengén ezek
+			
+			\caption{Timing Data for Various Scenes}
+			\label{tab:timing_data}
+		\end{table}
+\end{frame}
+
+	%------------------------------------------------
 \begin{frame}{Összefoglalás}
 \begin{columns}[T]
 \begin{column}{0.45\textwidth}
@@ -689,18 +749,17 @@ Bemutatott módszer:
     \item Pipeline váltások csökkentése
 \end{itemize}
 
-Cél:
-\begin{center}
-\textbf{Hatékonyabb real-time SDF megjelenítés}
-\end{center}
 
 \end{column}
 \begin{column}{0.45\textwidth}
 \end{column}
 \end{columns}
 \end{frame}
-
-\begin{frame}{References}
-	\printbibliography[title=bibliograpy]
-	\end{frame}
+\begin{frame}{Összefoglalás}
+	\vfill
+	\centering\Huge \emph{Köszönöm a figyelmet!}
+\end{frame}
+%   \begin{frame}{References}
+%   	\printbibliography[title=bibliograpy]
+%	\end{frame}
 \end{document}
