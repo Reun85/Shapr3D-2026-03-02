@@ -35,12 +35,12 @@ DNF: 366
 !DNF: 1460
 DNF: 185
 - ultra shader: 408
-- better ultra shader: 49300q
+- better ultra shader: 49300
 - recollect: 36910
 - merge: 660
 
 
-## Double helix LARGE 2k objects
+## Double helix LARGE 2.7k objects
 !DNF: 0.6seconds
 DNF: 800
 -ultra shader: 608
@@ -48,4 +48,4 @@ DNF: 800
 
 
 # 2500 boxes
-DNF: 800
+DNF: 792
