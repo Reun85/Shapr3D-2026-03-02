@@ -408,15 +408,8 @@ Az unió és metszet műveletek:
 \]
 
 \begin{itemize}
-    \item Nem minden esetben pontos távolságfüggvények
-    \item Nem elsőrendben folytonosak
-\end{itemize}
-
-Példa:
-\begin{itemize}
-    \item Doboz + gömb
-    \item A gömb nem változtatja a doboz kiterjedését
-    \item De befolyásolja a távolságfüggvényt
+    \item Csak alsó becslés 
+    \item Térben elkülöníthető testek távolságfüggvényei.
     \item Lassabb konvergencia sphere tracing során
 \end{itemize}
 
@@ -453,8 +446,8 @@ Cél: \textbf{Automatikus befoglaló tér meghatározása}.
 \begin{column}{0.45\textwidth}
 \only<1>{\includegraphics[width=\linewidth]{images/sdf_bad.png}}
 \only<2>{\includegraphics[width=\linewidth]{images/sdf_bad_boxes.png}}
-\only<3>{\includegraphics[width=\linewidth]{images/sdf_bad_only_sphere_sdf.png}}
-\only<4>{\includegraphics[width=\linewidth]{images/sdf_bad_only_box_sdf.png}}
+\only<4>{\includegraphics[width=\linewidth]{images/sdf_bad_only_sphere_sdf.png}}
+\only<3>{\includegraphics[width=\linewidth]{images/sdf_bad_only_box_sdf.png}}
 \end{column}
 \end{columns}
 \end{frame}
@@ -502,7 +495,6 @@ Megoldásunk:
 Cél:
 \begin{itemize}
     \item Struktúra megőrzése
-    \item Matematikai információ kinyerhetősége
 \end{itemize}
 \end{column}
 
@@ -514,10 +506,11 @@ Cél:
 \subsection{Intervallum aritmetika}
 \begin{frame}{Intervallum aritmetika}
 
-\begin{columns}[T]
+\begin{columns}[c]
 
 \begin{column}{0.45\textwidth}
-\includegraphics[width=\linewidth]{images/intervallum_back.png}
+\only<1>{\includegraphics[width=\linewidth]{images/intervallum_back.png}}
+\only<2>{\includegraphics[width=\linewidth]{images/intervallum_back_solved.png}}
 \end{column}
 \begin{column}{0.45\textwidth}
 	Kérdés: hol negatív a függvény?
@@ -566,14 +559,13 @@ Cél:
 	\]
 	
 	A befoglaló poliéder:
-	\begin{itemize}
-		\item  \[\begin{cases}
+	\[\begin{cases}
 			dot(\mathbf{n_1}, \mathbf{x}) + d_1 <=0\\
 			dot(\mathbf{n_2}, \mathbf{x}) + d_2 <=0\\
 			...\\
 			dot(\mathbf{n_k}, \mathbf{x}) + d_k <=0\\
 		\end{cases}\]
-	\end{itemize}
+	
 	
 	
 	
@@ -582,7 +574,6 @@ Cél:
 		\item Végtelen objektumok kezelhetők
 		\item Affin transzformációk pontos kezelése
 		\item Forgatás nem torzítja túl a becslést
-		\item Teljesítmény
 	\end{itemize}
 	
 \end{column}
@@ -607,7 +598,13 @@ Diszjunktív normálforma(DNF):
 \begin{itemize}
     \item Egyszerűbb uniók
     \item Korai elágazás-elimináció
+
 \end{itemize}
+\begin{align*}
+	A \cap (B \cup C) &= (A \cap B) \cup (A \cap C) \\
+	\overline{A \cap B} &= \overline{A} \cup \overline{B}
+\end{align*}
+
 
 \end{column}
 \begin{column}{0.45\textwidth}
@@ -618,7 +615,7 @@ Diszjunktív normálforma(DNF):
 \end{frame}
 \begin{frame}
 	\centering
-	\includegraphics[width=\linewidth]{images/intervallum_pipeline.png}
+	\includegraphics[width=0.8\linewidth]{images/intervallum_pipeline.png}
 \end{frame}
 
 %------------------------------------------------
@@ -627,20 +624,22 @@ Diszjunktív normálforma(DNF):
 \begin{frame}{Pipeline bontás és teljesítmény}
 \begin{columns}[T]
 \begin{column}{0.45\textwidth}
+	Egy sdf:
 \begin{itemize}
 	\item Mindent visszafonunk
-	\item Teljes SDF kiértékelés minden dobozon
+	\item Ez referenciaként szolgál a méréshez.
 \end{itemize}
+
+
 
 Ha minden kis doboz külön pipeline-t kap:
 
 \begin{itemize}
-    \item Kis színterekben gyors
+    \item Üres terekben verhetetlen.
     \item Sok doboz esetén pipeline váltási költség nő
 \end{itemize}
 
 
-Ez referenciaként szolgál a méréshez.
 
 %Az unió műveletek helyettesíthetők:
 
@@ -688,8 +687,7 @@ Probléma:
 \end{itemize}
 \end{column}
 \begin{column}{0.45\textwidth}
-	\only<2>{\includegraphics[width=\linewidth]{images/opt/DNF_const_merge.png}}
-	\only<1>{\includegraphics[width=\linewidth]{images/opt/DNF_spatial_coherence.png}}
+	\includegraphics[width=\linewidth]{images/opt/DNF_const_merge.png}
 \end{column}
 \end{columns}
 \end{frame}
@@ -720,10 +718,11 @@ Probléma:
 
 \begin{frame}{Összefoglaló}
 	\begin{itemize}
-		\item Semmi
+		\item SDF
 		\item Naiv
 		\item Monolitikus
 		\item Indexelt
+		\item Instanced
 		\item Parametrikus
 	\end{itemize}
 \end{frame}
@@ -743,7 +742,7 @@ Probléma:
 				DH & 1460 & 185 & 408 & 49300 & 36910 & 660 \\ \hline
 				DH 2.7k obj & FAIL 0.6 s & 800 & FAIL 608 & - & - & - \\ \hline
 				2500 boxes & FAIL & 792 & - & - & - & - \\ \hline
-				1000 boxes & 232200 & 2200
+				1000 boxes & 232200 & 2200 & & & & \\ \hline
 			\end{tabular}
 			
 			\caption{GPU: 2080 SUPER}
